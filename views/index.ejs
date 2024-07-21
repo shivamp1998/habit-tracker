@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Tracker</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Habit Tracker</h1>
+    <% if (error) { %>
+      <div class="error-message"><%= error %></div>
+    <% } %>
+    <form action="/habits/add" method="POST" class="habit-form">
+      <input type="text" name="name" placeholder="New Habit" required>
+      <button type="submit">Add Habit</button>
+    </form>
+    <div class="habits">
+      <% habits.forEach(habit => { %>
+        <a href="/habits/<%= habit._id %>" class="habit-card">
+          <div class="habit">
+            <h2><%= habit.name %></h2>
+            <p>Total days done: <%= habit.dates.filter(date => date.status === 'done').length %></p>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>

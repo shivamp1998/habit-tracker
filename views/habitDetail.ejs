@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Detail</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1><%= habit.name %></h1>
+    <div class="dates">
+      <% for (let i = 0; i < 7; i++) { 
+        const date = new Date();
+        date.setDate(date.getDate() - i);
+        const dateString = date.toISOString().split('T')[0];
+        const dayHabit = habit.dates.find(d => d.date === dateString);
+        const status = dayHabit ? dayHabit.status : 'none';
+      %>
+        <form action="/habits/update/<%= habit._id %>" method="POST" class="date-form">
+          <input type="hidden" name="date" value="<%= dateString %>">
+          <select name="status" class="status-select <%= status === 'done' ? 'done' : status === 'not done' ? 'not-done' : 'none' %>" onchange="this.form.submit()">
+            <option value="done" <%= status === 'done' ? 'selected' : '' %>>Done</option>
+            <option value="not done" <%= status === 'not done' ? 'selected' : '' %>>Not Done</option>
+            <option value="none" <%= status === 'none' ? 'selected' : '' %>>None</option>
+          </select>
+          <span class="date-label"><%= dateString %></span>
+        </form>
+      <% } %>
+    </div>
+    <a href="/habits">Back to Habit List</a>
+  </div>
+</body>
+</html>
