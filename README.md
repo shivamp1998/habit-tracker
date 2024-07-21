@@ -20,14 +20,15 @@ A simple habit tracker app built with Node.js and EJS to help you keep track of 
    cd habit-tracker
 
 2. **Install dependencies**
-    ``sh
+    ```1`sh
     npm install
 
 3. **Configuring Environment variables**
-    replace .env.example with .env and add your mongodb url
+    Replace .env.example with .env and add your MongoDB URL.
+
 
 4. **Run the application**
-    ``sh
+    ```sh
     npm start
 
 
